@@ -1,15 +1,12 @@
 import random
 
 directions = ['n', 'e', 's', 'w']
-start_orientation = 'n'
+start_orientation = directions[0]
 max_x = 10
 max_y = 10
 valid_commands = ['f', 'r', 'l']
 instructions = 'You are facing {start_orientation}.\nPress f to move forward\nPress r to turn right.\nPress l to turn left.\nPress enter d when you have plotted the whole course.'
-
-def declare_winner(contestant):
-    print(f"{contestant} wins")
-   
+  
 class Bird:
 
     def __init__(self, position, direction):
@@ -51,7 +48,6 @@ class Bird:
             self.direction == 'w'
             self.move_west()
 
-
 class Pig:
 
     def __init__(self, position):
@@ -60,7 +56,6 @@ class Pig:
 
     def __str__(self):
         return 'pig'    
-
 
 class Board:
 
@@ -84,7 +79,6 @@ class Board:
         print('\n'.join(
             [self.row_to_str(row) for row in pos_arr]
             ))
-
 
 class Workspace:
 
@@ -146,12 +140,19 @@ class Game:
         else:
             print('error')
 
-        declare_winner(winner)
+        print(f"{winner} wins")
 
-        self.board.draw_board(bird, pig)
+    def draw_result(self):
+        self.board.draw_board(self.bird, self.pig)
+
+# Run the game:
 
 game = Game()   
 
 game.initialize()
+
 game.play()
+
 game.determine_winner()
+
+game.draw_result()
